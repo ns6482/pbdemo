@@ -1,0 +1,6 @@
+C:\Temp\PbDemo\pb.ui\bin\pb.ui.dll.config
+C:\Temp\PbDemo\pb.ui\bin\pb.ui.dll
+C:\Temp\PbDemo\pb.ui\bin\pb.ui.pdb
+C:\Temp\PbDemo\pb.ui\obj\Debug\pb.ui.csprojResolveAssemblyReference.cache
+C:\Temp\PbDemo\pb.ui\obj\Debug\pb.ui.dll
+C:\Temp\PbDemo\pb.ui\obj\Debug\pb.ui.pdb
