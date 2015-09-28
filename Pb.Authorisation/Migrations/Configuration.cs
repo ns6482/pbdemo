@@ -1,4 +1,5 @@
 using System.Data.Entity.Migrations;
+using Microsoft.AspNet.Identity.EntityFramework;
 using PbDemo.Authorisation.Database;
 
 namespace PbDemo.Authorisation.Migrations
