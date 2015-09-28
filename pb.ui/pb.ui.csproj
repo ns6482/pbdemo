@@ -391,7 +391,6 @@
     <Content Include="bower_components\jquery\dist\jquery.min.map" />
     <Content Include="bower_components\jquery\src\sizzle\dist\sizzle.min.map" />
     <Content Include="bower.json" />
-    <Content Include="README.md" />
     <Content Include="package.json" />
     <Content Include="app\.buildignore" />
     <Content Include="app\.htaccess" />
