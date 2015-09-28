@@ -7,8 +7,7 @@
  * # auth.service
  * Service in the purplebricksuiApp.
  */
-angular.module('purplebricksuiApp')
-  .factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', function ($http, $q, localStorageService, ngAuthSettings) {
+pbApp.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', '$log', '$state', function ($http, $q, localStorageService, ngAuthSettings, $log, $state) {
 
       var serviceBase = ngAuthSettings.apiServiceBaseUri;
       var authServiceFactory = {};
@@ -16,15 +15,15 @@ angular.module('purplebricksuiApp')
       var authentication = {
           isAuth: false,
           userName: "",
-          //useRefreshTokens: false
+          userType: ""
       };
 
-     
-      var saveRegistration = function (registration) {
+
+      var saveRegistration = function (registration, type) {
 
           logOut();
 
-          return $http.post(serviceBase + 'api/account/register', registration).then(function (response) {
+          return $http.post(serviceBase + 'api/user/register/' + type, registration).then(function (response) {
               return response;
           });
 
@@ -32,34 +31,35 @@ angular.module('purplebricksuiApp')
 
       var login = function (loginData) {
 
+
           var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
-          //if (loginData.useRefreshTokens) {
-          //    data = data + "&client_id=" + ngAuthSettings.clientId;
-          //}
+          //var deferred = $q.defer();
 
-          var deferred = $q.defer();
-
-          $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+          return $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
               if (loginData.useRefreshTokens) {
-                  localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+                  localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, userType: response.user_type});
               }
               else {
-                  localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
+                  localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, userType: response.user_type });
               }
               authentication.isAuth = true;
               authentication.userName = loginData.userName;
-              //authentication.useRefreshTokens = loginData.useRefreshTokens;
+              authentication.userType = response.user_type;
 
-              deferred.resolve(response);
+              $log.debug('retrieved auth details:');
+              $log.debug(authentication);
+
+              return authentication;
+              //deferred.resolve(response);
 
           }).error(function (err, status) {
               logOut();
-              deferred.reject(err);
+              //deferred.reject(err);
           });
 
-          return deferred.promise;
+          //return deferred.promise;
 
       };
 
@@ -70,6 +70,7 @@ angular.module('purplebricksuiApp')
           authentication.isAuth = false;
           authentication.userName = "";
           authentication.useRefreshTokens = false;
+          authentication.userType = "";
 
       };
 

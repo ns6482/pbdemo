@@ -7,8 +7,7 @@
  * # MainCtrl
  * Controller of the purplebricksuiApp
  */
-angular.module('purplebricksuiApp')
-  .controller('MainCtrl', function () {
+pbApp.controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

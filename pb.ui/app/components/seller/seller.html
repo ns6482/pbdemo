@@ -1,0 +1,51 @@
+﻿<h2>Your houses</h2>
+<p>Hello {{seller.userName}}, please make an offer on a house</p>
+
+<div>
+    <h3>Sell your house</h3>
+
+    <form class="form" name="form">
+        <div class="form-group-sm">
+            <label for="title">Name</label>
+            <input required type="text" class="form-control" ng-model ="seller.house.title" id="title" placeholder="Enter House Title">
+        </div>
+        <div class="form-group-sm">
+            <label for="description">Description</label>
+            <input required type="text" class="form-control" ng-model="seller.house.description" id="description" placeholder="My house is awesome">
+        </div>
+        <div class="form-group-sm">
+            <label for="amount">Amount</label>
+            <input required type="number" class="form-control" ng-model ="seller.house.amount" id="amount" placeholder="100000">
+        </div>
+        <button type="submit" data-ng-click="seller.list()" class=" btn btn-default">List house</button>
+    </form>
+
+    <!-- if i had time would put validation, ngMessages here-->
+</div>
+<div ng-if="seller.houses.length > 0">
+    <div ng-repeat="house in seller.houses" class="well well-sm">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+
+        <h3>
+            {{house.title}} <small>{{house.description}}</small>
+        </h3>
+        <span class="badge">{{house.value | currency}}</span>
+
+        <div ng-if="!house.accepted">
+            <span ng-if="house.offers.length >0">Offers Made:</span>
+            <span ng-if="house.offers.length ===0">Don;t worry, you'll get offers soon</span>
+            <ul ng-repeat="offer in house.offers">
+                <li>On {{offer.offerDate | date}} {{offer.buyer}} made an offer of {{offer.amount | currency}} <a class="btn btn-sm btn-danger" ng-click="seller.accept(offer)">Accept</a></li>
+            </ul>
+        </div>
+        <div ng-if="house.acceptedOffer">
+            You accepted an offer on {{house.accepted | date}}
+            <p>
+                <em>Todo: show buyer name, amount and date etc...</em>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+

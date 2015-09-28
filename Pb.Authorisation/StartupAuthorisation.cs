@@ -22,11 +22,13 @@ namespace PbDemo.Authorisation
         /// <param name="app">The application.</param>
         public void Configuration(IAppBuilder app)
         {
-            //very important, don't screw the order up 
-            var config = new HttpConfiguration();
+
 
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
             ConfigureOauth(app);
+
+            //very important, don't screw the order up 
+            var config = new HttpConfiguration();
 
             WebApiConfig.Register(config);
             app.UseCors(CorsOptions.AllowAll);

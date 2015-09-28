@@ -21,7 +21,7 @@ namespace Pb.WebApi.Controllers
         /// <summary>
         /// The _house context
         /// </summary>
-        private readonly IHouseContext _houseContext; //will be injected
+        private readonly IHouseContext _houseContext; //todo should be injected, need to do
 
         #endregion
 
@@ -52,6 +52,8 @@ namespace Pb.WebApi.Controllers
         {
             //could use automapper here, bit annoying 
 
+            var username = GetUserName();
+
             var houses = _houseContext.Houses.Select(h => new HouseResponseModel
             {
                 Id = h.ID,
@@ -61,7 +63,8 @@ namespace Pb.WebApi.Controllers
                 Listed = h.Listed,
                 Owner = h.Owner,
                 Title = h.Title,
-                Offers = h.Offers
+                Offers = h.Offers.Where(o => o.Buyer == username).ToList(), //need to filter by current user, don't want to see other offers!
+                Value = h.Value 
             });
 
             var result = new HousesResponseModel {Results = houses};
@@ -116,7 +119,8 @@ namespace Pb.WebApi.Controllers
                 Listed = h.Listed,
                 Owner = h.Owner,
                 Title = h.Title,
-                Offers = h.Offers
+                Offers = h.Offers,
+                Value =  h.Value
             }).Where(h => h.Owner == name);
 
             var response = new HousesResponseModel {Results = sellersHouses.ToList()};

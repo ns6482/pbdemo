@@ -9,19 +9,16 @@ var serviceBase = "http://localhost";
  *
  * Main module of the application.
  */
-angular
+var pbApp = angular
     .module("purplebricksuiApp", [
-        "pb.registration",
         "ngAnimate",
         "ngCookies",
         "ngResource",
         "ui.router",
         "ngSanitize",
-        "ngTouch"
-    ]).
-    constant("ngAuthSettings", {
-        apiServiceBaseUri: serviceBase,
-    })
+        "ngTouch",
+        "LocalStorageModule"
+    ])
     .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         //Setup interceptor to add bear tokens to header, and redirect when unauth
 
@@ -40,10 +37,10 @@ angular
                 abstract: true,
                 templateUrl: "index.html",
                 views: {
-                    'navigationView': {
-                        templateUrl: "components/navigation/navigation.html",
-                        //controller: 'NavigationController',
-                        //controllerAs: 'navigation'
+                    'navigationView@': {
+                        templateUrl: "components/navigation/nav.html",
+                        controller: 'NavigationCtrl',
+                        controllerAs: 'navigation'
                     }
                 }
             })
@@ -51,7 +48,7 @@ angular
                 url: "/",
                 views: {
                     'mainView@': {
-                        templateUrl: "views/main.html",
+                        templateUrl: "components/main/main.html",
                         controller: "MainCtrl",
                         controllerAs: "main"
                     }
@@ -61,10 +58,40 @@ angular
                 url: "/register",
                 views: {
                     'mainView@': {
-                        templateUrl: "components/registration/registration.html",
+                        templateUrl: "components/registration/reg.html",
                         controller: "RegistrationCtrl",
                         controllerAs: "registration"
                     }
                 }
-            });
+            })
+            .state("pb.login", {
+                url: "/login",
+                views: {
+                    'mainView@': {
+                        templateUrl: "components/login/login.html",
+                        controller: "LoginCtrl",
+                        controllerAs: "login"
+                    }
+                }
+            })
+            .state("pb.buyer", {
+                url: "/buyer",
+                views: {
+                    'mainView@' : {
+                        templateUrl: "components/buyer/buyer.html",
+                        controller: "BuyerCtrl",
+                        controllerAs: "buyer"
+                    }
+                }
+            })
+        .state("pb.seller", {
+            url: "/seller",
+            views: {
+                'mainView@': {
+                    templateUrl: "components/seller/seller.html",
+                    controller: "SellerCtrl",
+                    controllerAs: "seller"
+                }
+            }
+        });
     });

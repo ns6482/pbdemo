@@ -1,0 +1,27 @@
+﻿<h2>Houses for you!</h2>
+<p>Hello {{buyer.userName}}, please make an offer on a house</p>
+
+<div>
+    <div ng-repeat="house in buyer.houses" class="well well-sm">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+
+        <h3>{{house.title}} <small>{{house.description}}</small>
+        </h3>
+        <span class="badge">{{house.value | currency}}</span>
+        Offer Value :
+        <input name="offer" type="number" ng-model="house.offerValue"/>
+        <a class="btn btn-sm btn-primary" ng-click="buyer.offer(house)">Make offer</a>
+
+        <div>
+            Your offers
+            <ul ng-repeat="offer in house.offers">
+                <li>On {{offer.offerDate | date}} you made an offer of {{offer.amount | currency}}</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!--
+Typically would have a modal here, with questions do you need to sell your house etc. First time buyer. Kept simple though.
+-->

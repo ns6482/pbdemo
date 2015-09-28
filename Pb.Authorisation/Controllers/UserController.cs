@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity;
 using PbDemo.Authorisation.Enums;
 using PbDemo.Authorisation.Models;
 using PbDemo.Authorisation.Repositories;
+
 
 namespace PbDemo.Authorisation.Controllers
 {
@@ -11,6 +13,8 @@ namespace PbDemo.Authorisation.Controllers
     /// Controller for registering users, sellers and buyers
     /// </summary>
     [RoutePrefix("api/User")]
+    //[EnableCors(origins: "http://localhost:32822", headers: "*", methods: "*")]
+ 
     public class UserController : ApiController
     {
         /// <summary>
@@ -21,6 +25,7 @@ namespace PbDemo.Authorisation.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="UserController"/> class.
         /// </summary>
+
         public UserController()
         {
             _repo = new AuthorisationRepository();

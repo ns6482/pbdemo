@@ -7,8 +7,7 @@
  * # auth.interceptor.service
  * Service in the purplebricksuiApp.
  */
-angular.module('purplebricksuiApp')
-  .factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
+pbApp.factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', '$log', function ($q, $injector, $location, localStorageService, $log) {
 
       var authInterceptorServiceFactory = {};
 
@@ -16,7 +15,10 @@ angular.module('purplebricksuiApp')
 
           config.headers = config.headers || {};
 
+          $log.debug('getting auth data');
           var authData = localStorageService.get('authorizationData');
+          $log.debug(angular.toJson(authData,1));
+
           if (authData) {
               config.headers.Authorization = 'Bearer ' + authData.token;
           }

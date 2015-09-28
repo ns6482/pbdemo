@@ -101,3 +101,5 @@ C:\Temp\PbDemo\Pb.Authorisation\obj\Debug\PbDemo.Authorisation.csproj.GenerateRe
 C:\Temp\PbDemo\Pb.Authorisation\obj\Debug\PbDemo.Authorisation.dll
 C:\Temp\PbDemo\Pb.Authorisation\obj\Debug\PbDemo.Authorisation.pdb
 C:\Temp\PbDemo\Pb.Authorisation\obj\Debug\PbDemo.Authorisation.csprojResolveAssemblyReference.cache
+C:\Temp\PbDemo\Pb.Authorisation\bin\System.Web.Http.Cors.dll
+C:\Temp\PbDemo\Pb.Authorisation\bin\System.Web.Http.Cors.xml

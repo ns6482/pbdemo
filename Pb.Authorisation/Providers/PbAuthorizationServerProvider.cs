@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.OAuth;
@@ -60,8 +61,9 @@ namespace PbDemo.Authorisation.Providers
                 }
 
                 actorType = user.Claims.First(x => x.ClaimType == ClaimTypes.Actor).ClaimValue;
-           
-               //determine if it's a buyer or a seller
+
+                context.OwinContext.Set("user_type", actorType);
+                //determine if it's a buyer or a seller
             }
 
             //useful info to include in the token here
@@ -72,6 +74,26 @@ namespace PbDemo.Authorisation.Providers
             identity.AddClaim(new Claim("actor", actorType));
 
             context.Validated(identity);
+        }
+
+        /// <summary>
+        /// Called at the final stage of a successful Token endpoint request. An application may implement this call in order to do any final
+        /// modification of the claims being used to issue access or refresh tokens. This call may also be used in order to add additional
+        /// response parameters to the Token endpoint's json response body.
+        /// </summary>
+        /// <param name="context">The context of the event carries information in and results out.</param>
+        /// <returns>
+        /// Task to enable asynchronous execution
+        /// </returns>
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+         
+            var userType = context.OwinContext.Get<string>("user_type");
+
+            context.AdditionalResponseParameters.Add("user_type", userType);
+
+
+            return Task.FromResult<object>(null);
         }
     }
 }

@@ -49,3 +49,5 @@ C:\Temp\PbDemo\Pb.WebApi\obj\Debug\Pb.WebApi.Migrations.init.resources
 C:\Temp\PbDemo\Pb.WebApi\obj\Debug\Pb.WebApi.Migrations.alter_house_listed_nullable.resources
 C:\Temp\PbDemo\Pb.WebApi\obj\Debug\Pb.WebApi.Migrations.alter_house_listed_nullable2.resources
 C:\Temp\PbDemo\Pb.WebApi\obj\Debug\Pb.WebApi.Migrations.alter_house_listed_nullable21.resources
+C:\Temp\PbDemo\Pb.WebApi\bin\System.Web.Http.Cors.dll
+C:\Temp\PbDemo\Pb.WebApi\bin\System.Web.Http.Cors.xml
