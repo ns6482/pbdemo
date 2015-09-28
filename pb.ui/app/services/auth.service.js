@@ -23,6 +23,9 @@ pbApp.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetti
 
           logOut();
 
+          $log.debug(registration);
+          $log.debug(type);
+
           return $http.post(serviceBase + 'api/user/register/' + type, registration).then(function (response) {
               return response;
           });

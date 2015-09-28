@@ -23,6 +23,7 @@ namespace PbDemo.Authorisation
         public void Configuration(IAppBuilder app)
         {
 
+            app.UseCors(CorsOptions.AllowAll);
 
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
             ConfigureOauth(app);
@@ -31,7 +32,6 @@ namespace PbDemo.Authorisation
             var config = new HttpConfiguration();
 
             WebApiConfig.Register(config);
-            app.UseCors(CorsOptions.AllowAll);
             //on the same server but the authentication server could quite easily be decoupled. At which will need to configure this for security.
             app.UseWebApi(config);
         }

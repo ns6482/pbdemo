@@ -10,9 +10,10 @@
         <div ng-if="!house.accepted">
             <span class="badge">{{house.value | currency}}</span>
             Offer Value :
-            <input name="offer" type="number" ng-model="house.offerValue" />
+            <input name="offer" type="number" ng-model="house.offerValue"/>
             <a class="btn btn-sm btn-primary" ng-click="buyer.offer(house)">Make offer</a>
         </div>
+        <span ng-if="house.accepted" class="badge">SOLD</span>
         <div>
             Your offers
             <ul ng-repeat="offer in house.offers">

@@ -7,27 +7,30 @@
  * # MainCtrl
  * Controller of the purplebricksuiApp
  */
-pbApp.controller('RegistrationCtrl', ["$log","$state", "authService", function ($log, $state, authService) {
+pbApp.controller('RegistrationCtrl', ["$log","$state", "authService", "$timeout", function ($log, $state, authService, $timeout) {
 
 
     var vm = this;
 
-    vm.userName = "";
+    vm.username = "";
     vm.password = "";
     vm.confirmPassword = "";
     vm.userType = "buyer";
-    vm.savedSuccessfully
+    vm.savedSuccessfully = false;
 
    
     vm.register = function () {
+
         var registration = {
-            "userName": vm.username,
+            "username": vm.username,
             "password": vm.password,
             "confirmPassword" : vm.confirmPassword
         }
 
+
         authService.saveRegistration(registration, vm.userType).then(function () {
 
+            $log.debug(registration);
              vm.savedSuccessfully = true;
 
              //give user change to see the message
@@ -38,7 +41,8 @@ pbApp.controller('RegistrationCtrl', ["$log","$state", "authService", function (
 
          }).catch(function(response) {
              var errors = [];
-             console.log(response);
+             $log.debug(response);
+             
              //for (var key in response.data.modelState) {
              //    for (var i = 0; i < response.data.modelState[key].length; i++) {
              //        errors.push(response.data.modelState[key][i]);
