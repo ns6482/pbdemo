@@ -12,8 +12,8 @@
         <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <ul class="nav navbar-nav" ng-if="navigation.authentication.isAuth">
 
-                <li ng-if="navigation.authentication.userType === 'buyer'" class="active"><a ui-sref="pb.buyer">See houses</a></li>
-                <li ng-if="navigation.authentication.userType === 'seller'" class="active"><a ui-sref="pb.seller">Make an offer</a></li>
+                <li ng-if="navigation.authentication.userType === 'buyer'" class="active"><a ui-sref="pb.buyer">Make an offer</a></li>
+                <li ng-if="navigation.authentication.userType === 'seller'" class="active"><a ui-sref="pb.seller">Sell your house</a></li>
 
                 <li><a href="" ng-click="navigation.logout()">Logout</a></li>
             </ul>
